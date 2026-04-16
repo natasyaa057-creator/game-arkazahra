@@ -24,17 +24,23 @@
       color: #f5f0ff;
       font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
     }
-    .char-pick-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 500;
+    .game-area .role-pick-layer {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 8px;
+      z-index: 28;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(10, 4, 18, 0.92);
+      gap: 8px;
+      pointer-events: none;
+      padding: 0 10px;
     }
-    .char-pick-overlay.is-hidden { display: none !important; pointer-events: none !important; }
+    .game-area .role-pick-layer.is-hidden {
+      display: none !important;
+      pointer-events: none !important;
+    }
     .app-shell { max-width: 1320px; margin: 0 auto; width: 100%; min-height: 100vh; display: flex; flex-direction: column; }
     #loadingOverlay {
       position: fixed;
@@ -167,18 +173,29 @@
             <div class="sleep-ghost-body"></div>
             <span class="sleep-ghost-label">Menunggu…</span>
           </div>
+          <div id="rolePickLayer" class="role-pick-layer is-hidden" aria-hidden="true" role="region" aria-label="Pilih peran">
+            <p class="role-pick-hint">Klik salah satu karakter di arena — atau tombol di bawah</p>
+            <div class="role-pick-row">
+              <button type="button" id="rolePickArka" class="role-pick-btn role-pick-btn--arka" aria-label="Main sebagai Arka">
+                <span class="role-pick-name">Arka</span>
+              </button>
+              <button type="button" id="rolePickZahra" class="role-pick-btn role-pick-btn--zahra" aria-label="Main sebagai Zahra">
+                <span class="role-pick-name">Zahra</span>
+              </button>
+            </div>
+          </div>
         </main>
         <aside class="lt-scene-sidepanel" aria-label="Ringkasan pesan hari ini">
           <div class="lt-side-day-card">
             <div class="lt-side-day-icon" aria-hidden="true">✉️</div>
             <h3 class="lt-side-day-heading">Pesan hari ini</h3>
-            <p class="lt-side-day-blurb" id="ltSideDayBlurb">Pilih karakter untuk mulai.</p>
+            <p class="lt-side-day-blurb" id="ltSideDayBlurb">Klik Arka atau Zahra di arena untuk mulai.</p>
           </div>
         </aside>
         </div>
 
         <div class="lt-bottom-bar">
-          <p id="controlsInfo" class="lt-hint">Pilih karakter untuk mulai</p>
+          <p id="controlsInfo" class="lt-hint">Klik Arka atau Zahra di arena</p>
           <p id="connectionInfo" class="lt-status">Belum terhubung</p>
           <div id="ltUnreadStrip" class="lt-unread-strip is-hidden" role="status" aria-live="polite"></div>
           <button type="button" id="ltBtnNotifPerm" class="lt-notif-perm" hidden>🔔 Izinkan notifikasi di perangkat</button>
@@ -267,18 +284,6 @@
   </div>
 
   <audio id="moodAmbientAudio" loop preload="none"></audio>
-
-  <div id="charPickOverlay" class="char-pick-overlay" aria-hidden="false">
-    <div class="char-pick-box">
-      <p class="char-pick-title">Mulai dulu</p>
-      <p class="char-pick-desc">Ketik <strong>arka</strong> atau <strong>zahra</strong> untuk memilih siapa yang kamu gerakkan.</p>
-      <form id="charPickForm" class="char-pick-form">
-        <input id="charPickInput" type="text" maxlength="12" autocomplete="off" placeholder="arka / zahra" autofocus>
-        <button type="submit">Mulai</button>
-      </form>
-      <p id="charPickError" class="char-pick-error" role="alert"></p>
-    </div>
-  </div>
 
   <script src="./script.js"></script>
 </body>
