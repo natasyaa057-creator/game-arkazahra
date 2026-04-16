@@ -5,7 +5,19 @@ const { WebSocketServer } = require("ws");
 
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocketServer({ server });
+const wss = new WebSocketServer({ server, perMessageDeflate: false });
+
+setInterval(() => {
+  wss.clients.forEach((client) => {
+    if (client.readyState === 1) {
+      try {
+        client.ping();
+      } catch (e) {
+        /* ignore */
+      }
+    }
+  });
+}, 25000);
 
 const PORT = Number(process.env.PORT) || 3000;
 const CHAT_MAX_LEN = 8000;

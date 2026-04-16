@@ -41,6 +41,9 @@
       display: none !important;
       pointer-events: none !important;
     }
+    .game-area .role-pick-row {
+      pointer-events: auto;
+    }
     .app-shell { max-width: 1320px; margin: 0 auto; width: 100%; min-height: 100vh; display: flex; flex-direction: column; }
     #loadingOverlay {
       position: fixed;
@@ -173,7 +176,7 @@
             <div class="sleep-ghost-body"></div>
             <span class="sleep-ghost-label">Menunggu…</span>
           </div>
-          <div id="rolePickLayer" class="role-pick-layer is-hidden" aria-hidden="true" role="region" aria-label="Pilih peran">
+          <div id="rolePickLayer" class="role-pick-layer" aria-hidden="false" role="region" aria-label="Pilih peran">
             <p class="role-pick-hint">Klik salah satu karakter di arena — atau tombol di bawah</p>
             <div class="role-pick-row">
               <button type="button" id="rolePickArka" class="role-pick-btn role-pick-btn--arka" aria-label="Main sebagai Arka">
